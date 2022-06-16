@@ -2,6 +2,7 @@ import keyInput from "./keyInput.js";
 import { connect, web3, contract } from './contract.js';
 
 const ratio = window.innerWidth / window.innerHeight;
+const contract_address = "0x7c53ef98d49eef0dd8f10dbfef21f97ae0434a26";
 
 // Creating the scene
 const scene = new THREE.Scene();
@@ -63,14 +64,14 @@ function animate() {
 
     // For Up
     if(keyInput.isPressed(38)){
-        camera.position.y += 0.05;
-        camera.position.x += 0.05;
+        camera.position.y += 0.5;
+        camera.position.x += 0.5;
     }
 
     // For Down
     if(keyInput.isPressed(40)){
-        camera.position.y -= 0.05;
-        camera.position.x -= 0.05;
+        camera.position.y -= 0.5;
+        camera.position.x -= 0.5;
     }
     
     camera.lookAt(ground.position);     // Set the camera to look at ground
@@ -95,8 +96,17 @@ async function onMint(){
     })
 }
 
+async function totalNFTs(){
+    const nfts = await fetch(`https://api.covalenthq.com/v1/80001/tokens/${contract_address}/nft_token_ids/?quote-currency=USD&format=JSON&key=`);
+    const { data } = await nfts.json();
+    console.log(data);
+    const header = document.getElementById("header");
+    header.innerText = `Total NFTs minted: ${data.items.length}`;
+}
+
 document.getElementById("submit_mint").onclick = onMint;
 
+totalNFTs();
 animate();
 connect.then((result) => {
     console.log(result);

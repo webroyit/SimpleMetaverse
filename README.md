@@ -8,3 +8,6 @@ Build basic dApps to get started with your web3 development journey:
 
 ## Verify Contract Link
 https://mumbai.polygonscan.com/address/0x7c53ef98d49eef0dd8f10dbfef21f97ae0434a26
+
+## Covalent API Used
+- https://api.covalenthq.com/v1/:chain_id/tokens/:contract_address/nft_token_ids    (Get NFT token IDs for contract)
