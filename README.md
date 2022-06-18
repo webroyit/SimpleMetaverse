@@ -1,6 +1,9 @@
 # Simple Metaverse
 A simple metaverse
 
+## Live Site
+https://simplemetaverse.netlify.app/
+
 ## Beginner’s Track
 Build basic dApps to get started with your web3 development journey:
 • Mint an NFT on Polygon using hardhat/truffle and verify the contract on Polygonscan.
