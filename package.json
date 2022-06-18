@@ -1,0 +1,29 @@
+{
+  "name": "simple_metaverse",
+  "version": "1.0.0",
+  "description": "A simple metaverse",
+  "source": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webroyit/SimpleMetaverse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webroyit/SimpleMetaverse/issues"
+  },
+  "homepage": "https://github.com/webroyit/SimpleMetaverse#readme",
+  "dependencies": {
+    "@uauth/js": "^2.0.0"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "parcel": "^2.6.1"
+  }
+}

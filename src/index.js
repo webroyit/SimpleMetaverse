@@ -1,5 +1,11 @@
 import keyInput from "./keyInput.js";
 import { connect, web3, contract } from './contract.js';
+import UAuth from '@uauth/js'
+
+const uauth = new UAuth({
+  clientID: '',
+  redirectUri: 'https://simplemetaverse.netlify.app/',
+})
 
 const ratio = window.innerWidth / window.innerHeight;
 const contract_address = "0x7c53ef98d49eef0dd8f10dbfef21f97ae0434a26";
@@ -104,20 +110,36 @@ async function totalNFTs(){
     header.innerText = `Total NFTs minted: ${data.items.length}`;
 }
 
+async function login(){
+    try {
+        const login = document.getElementById("login");
+        login.className = "none";
+
+        const authorization = await uauth.loginWithPopup();
+        console.log(authorization);
+        const header = document.getElementById("name");
+        header.innerText = authorization.idToken.sub;
+
+        connect.then((result) => {
+            console.log(result);
+            result.buildings.forEach((b, index) => {
+                if(index <= result.supply) {
+                    const boxGeometry = new THREE.BoxGeometry(b.w, b.h, b.d);
+                    const boxMaterial = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
+                    const box = new THREE.Mesh( boxGeometry, boxMaterial );
+                    box.position.set(b.x, b.y, b.z);
+        
+                    scene.add( box );
+                }
+            })
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 document.getElementById("submit_mint").onclick = onMint;
+document.getElementById("login").onclick = login;
 
 totalNFTs();
 animate();
-connect.then((result) => {
-    console.log(result);
-    result.buildings.forEach((b, index) => {
-        if(index <= result.supply) {
-            const boxGeometry = new THREE.BoxGeometry(b.w, b.h, b.d);
-            const boxMaterial = new THREE.MeshPhongMaterial( { color: 0x00ff00 } );
-            const box = new THREE.Mesh( boxGeometry, boxMaterial );
-            box.position.set(b.x, b.y, b.z);
-
-            scene.add( box );
-        }
-    })
-});

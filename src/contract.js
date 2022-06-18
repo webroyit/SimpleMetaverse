@@ -1,6 +1,6 @@
 // Connection to the blockchain
 
-import abi from "./abi/abi.json" assert {type: "json"};
+import abi from "./abi/abi.json";
 
 export let web3;
 export let contract;
